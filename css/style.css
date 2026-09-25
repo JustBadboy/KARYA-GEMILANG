@@ -101,3 +101,7 @@ input,select,textarea{font-size:16px;max-width:100%}
 #lg .on{background:var(--pri);color:var(--pf)}
 .adm #lg{display:none}
 body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif}
+
+.docsample{max-width:420px;width:100%;display:block;border:10px solid #fff;border-radius:4px;box-shadow:0 8px 24px #0006;margin:10px 0 22px}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .docsample{border-color:#22283a}}
+:root[data-theme="dark"] .docsample{border-color:#22283a}
