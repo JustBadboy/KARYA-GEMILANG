@@ -22,6 +22,29 @@ if((D.v||0)<3){const d=(id,label,type,scope,req)=>({id,label,type,req:!!req,scop
   D.forms.forEach(f=>{const u=UI[f.label];if(u){D.tr.en[f.label]=D.tr.en[f.label]||u[0];D.tr.zh[f.label]=D.tr.zh[f.label]||u[1]}});
   D.v=3}
 D.forms=D.forms||[];
+Object.assign(UI,{'Layanan kami':['Our services','我们的服务'],'Pembuatan KITAS':['KITAS Processing','办理KITAS'],'VISA':['Visa','签证'],'Izin kerja Orang Asing (TKA)':['Work Permits for Foreign Workers (TKA)','外籍劳工（TKA）工作许可'],'Pendirian Perusahaan':['Company Establishment','公司设立'],'Tentang Kami':['About Us','关于我们'],'Tujuan Kami':['Our Purpose','我们的目标'],'Visi':['Vision','愿景'],'Misi':['Mission','使命'],'Sektor yang kami layani':['Sectors we serve','服务行业'],'Smelter':['Smelters','冶炼厂'],'Kantor perusahaan':['Corporate offices','公司办事处'],'Sekolah internasional':['International schools','国际学校'],'Individu dengan sponsor WNI':['Individuals sponsored by Indonesian citizens','由印尼公民担保的个人']});
+if((D.v||0)<4){
+  const T0='PT Karya Gemilang Konsultan, sebuah divisi dari PT Bintang Aneka Karya Jasa Konsultan, memiliki spesialisasi dalam layanan pengurusan visa, izin tinggal bagi warga negara asing, izin kerja tenaga kerja asing (TKA), serta legalitas perusahaan. Sejak didirikan pada tahun 2012, kami telah membantu lebih dari 400 perusahaan dan yayasan dari berbagai sektor—mulai dari fasilitas pengolahan logam (smelter) dan kantor perusahaan hingga sekolah internasional—serta individu yang disponsori oleh warga negara Indonesia. Setiap solusi dirancang khusus untuk memenuhi kebutuhan spesifik klien, guna menghasilkan capaian yang akurat, terukur, dan berkelanjutan.',
+    A={tujuan:'Membantu klien memenuhi kebutuhan terkait visa, izin tinggal, izin kerja tenaga kerja asing (TKA), dan legalitas perusahaan secara cepat, akurat, serta sesuai dengan peraturan, sehingga mereka dapat beroperasi di Indonesia dengan penuh keyakinan dan ketenangan pikiran.',
+      visi:'Menjadi mitra tepercaya untuk layanan visa, izin tinggal, izin kerja tenaga kerja asing (TKA), dan legalitas perusahaan di Indonesia.',
+      misi:'Menyediakan layanan yang cepat, akurat, dan memenuhi ketentuan dengan solusi yang disesuaikan dengan kebutuhan klien, guna membangun hubungan jangka panjang yang transparan sembari senantiasa selaras dengan perkembangan regulasi terkini.',
+      n:'400+',nl:'Klien perusahaan, yayasan, dan individu telah kami dampingi sejak 2012'},
+    EN=['PT Karya Gemilang Konsultan, a division of PT Bintang Aneka Karya Jasa Konsultan, specializes in visa services, residence permits for foreign nationals, work permits for foreign workers (TKA), and company legality. Since our founding in 2012, we have helped more than 400 companies and foundations across many sectors, from metal processing facilities (smelters) and corporate offices to international schools, as well as individuals sponsored by Indonesian citizens. Every solution is tailored to the specific needs of the client to deliver results that are accurate, measurable, and sustainable.',
+      'Helping clients meet their needs for visas, residence permits, foreign worker (TKA) work permits, and company legality quickly, accurately, and in compliance with regulations, so they can operate in Indonesia with confidence and peace of mind.',
+      'To be the trusted partner for visa, residence permit, foreign worker (TKA) work permit, and company legality services in Indonesia.',
+      'To provide fast, accurate, and compliant services with solutions tailored to client needs, building transparent long-term relationships while staying aligned with the latest regulatory developments.',
+      'Corporate, foundation, and individual clients we have supported since 2012'],
+    ZH=['PT Karya Gemilang Konsultan 是 PT Bintang Aneka Karya Jasa Konsultan 旗下的事业部，专注于签证办理、外国人居留许可、外籍劳工（TKA）工作许可以及公司法律事务。自2012年成立以来，我们已协助400多家来自不同行业的公司和基金会（从金属冶炼厂、公司办事处到国际学校），以及由印尼公民担保的个人。我们为每位客户量身定制解决方案，以实现准确、可衡量且可持续的成果。',
+      '帮助客户快速、准确且合规地满足签证、居留许可、外籍劳工（TKA）工作许可及公司法律事务方面的需求，使他们能够在印尼安心、从容地开展业务。',
+      '成为印尼签证、居留许可、外籍劳工（TKA）工作许可及公司法律事务服务领域值得信赖的合作伙伴。',
+      '提供快速、准确且合规的服务，并根据客户需求量身定制解决方案，建立透明的长期合作关系，同时始终紧跟最新法规动态。',
+      '自2012年以来，我们已服务的企业、基金会及个人客户'],
+    K=[T0,A.tujuan,A.visi,A.misi,A.nl];
+  D.about=Object.assign(A,D.about||{});
+  const b=D.pages.find(x=>x.id=='beranda');if(b)b.body=T0;
+  K.forEach((k,i)=>{D.tr.en[k]=D.tr.en[k]||EN[i];D.tr.zh[k]=D.tr.zh[k]||ZH[i]});
+  D.v=4}
+D.about=D.about||{};
 let cur='beranda',admin=null,tab='site',authed=false,can=false,fails=0,until=0,REP=[];
 
 function fmt(t){let h='',ul=false;
@@ -43,8 +66,8 @@ function nav(){const P=D.pages.filter(p=>p.show),s=D.site;
     return `<div class="dd">${p.group?`<button>${E(p.title)} ▾</button>`:`<a href="#/${p.id}" class="${cur==p.id?'on':''}">${E(p.title)} ▾</a>`}<div class="sub">${its(p.id)}</div></div>`}).join('')+`<a class="cta" href="#/ajukan">${E(s.cta||'Hubungi Kami')}</a>`}
 
 function foot(){const s=D.site;
-  $('#foot').innerHTML=`<div class="wrap"><strong>${esc(s.name)}</strong><br>${[s.address,s.phone,s.email].filter(Boolean).map(esc).join(' · ')}<br><span id="cp">© ${new Date().getFullYear()} ${esc(s.name)}</span></div>${s.wa?`<a class="wab" href="${wa(s.wa)}"${ext} aria-label="WhatsApp">💬</a>`:''}`;
-  use('user').then(u=>{if(u&&u.canEdit()){const a=document.createElement('a');a.href='#/panel';a.textContent='Panel Admin';$('#foot .wrap').append(' · ',a)}}).catch(()=>{})}
+  $('#foot').innerHTML=`<div class="wrap fw">${s.logo?`<img class="flogo" src="${s.logo}" alt="${esc(s.name)}">`:''}<div class="ft"><strong>${esc(s.name)}</strong><br>${[s.address,s.phone,s.email].filter(Boolean).map(esc).join(' · ')}<br><span id="cp">© ${new Date().getFullYear()} ${esc(s.name)}</span></div></div>${s.wa?`<a class="wab" href="${wa(s.wa)}"${ext} aria-label="WhatsApp">💬</a>`:''}`;
+  use('user').then(u=>{if(u&&u.canEdit()){const a=document.createElement('a');a.href='#/panel';a.textContent='Panel Admin';$('#foot .ft').append(' · ',a)}}).catch(()=>{})}
 
 const dl=v=>String(v.docs||'').split('\n').filter(l=>l.startsWith('- ')).map(l=>l.slice(2));
 const inJV=q=>{const P=D.pages;for(let x=q,n=0;x&&n++<8;x=P.find(y=>y.id==x.parent))if(x.id=='jenis-visa')return true;return false};
@@ -70,12 +93,30 @@ function apply(id){const P=D.pages,p=id&&P.find(x=>x.id==id),ti=q=>E(q.at||q.tit
 
 function contact(){const s=D.site;return `<div class="card">${[s.phone&&'📞 '+esc(s.phone),s.email&&'✉️ '+esc(s.email),s.address&&'📍 '+esc(s.address)].filter(Boolean).join('<br>')||`<span class="mut">${E('Isi data kontak di Panel Admin.')}</span>`}</div>${form()}`}
 
+const IC={t:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg>',v:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>',m:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h12l-2.5 4L17 12H5"/></svg>'};
+function aboutSec(p){const A=D.about,s=D.site,sk=['Pembuatan KITAS','VISA','Izin kerja Orang Asing (TKA)','Pendirian Perusahaan'];
+  return `<section class="wrap about"><div class="eyebrow line">${E('Profil Perusahaan')}</div>
+<div class="ab">
+<article class="bx bx-t"><div class="bx-main"><h2>${E('Tentang Kami')}</h2><div class="prose">${fmt(p.body)}</div><a class="btn pri" href="#/ajukan">${E(s.cta)}</a></div>
+<aside class="sek"><h3>${E('Layanan kami')}</h3><ul>${sk.map(x=>`<li>${E(x)}</li>`).join('')}</ul></aside></article>
+${A.tujuan?`<article class="bx bx-g"><span class="ic">${IC.t}</span><div><h3>${E('Tujuan Kami')}</h3><p>${E(A.tujuan)}</p></div></article>`:''}
+<div class="vm">${A.visi?`<article class="bx"><span class="ic">${IC.v}</span><h3>${E('Visi')}</h3><p>${E(A.visi)}</p></article>`:''}${A.misi?`<article class="bx"><span class="ic">${IC.m}</span><h3>${E('Misi')}</h3><p>${E(A.misi)}</p></article>`:''}</div>
+</div></section>`}
+function statSec(){const A=D.about;if(!A.n)return '';const n=String(A.n),num=parseInt(n.replace(/\D/g,''),10)||0,sfx=n.replace(/[\d.,\s]/g,'');
+  return `<section class="stat"><div class="wrap"><div class="stat-n" role="img" aria-label="${esc(n)}"><span class="cnt" aria-hidden="true" data-to="${num}">0</span><span aria-hidden="true">${esc(sfx)}</span></div><p class="stat-l">${E(A.nl)}</p></div></section>`}
+function runCount(){const els=document.querySelectorAll('.cnt');if(!els.length)return;
+  const done=e=>{e.textContent=e.dataset.to},go=e=>{const to=+e.dataset.to,t0=performance.now(),dur=1900;
+    const f=t=>{const k=Math.min(1,(t-t0)/dur);e.textContent=Math.round(to*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(f)};requestAnimationFrame(f)};
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window)){els.forEach(done);return}
+  const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){io.unobserve(x.target);go(x.target)}}),{threshold:.5});els.forEach(e=>io.observe(e))}
+
 function home(p){const s=D.site,h=t=>`<h2>${E(t)}</h2>`,el=t=>`<div class="eyebrow line">${E(t)}</div>`,c=(a,f)=>`<div class="cards">${a.map(f).join('')}</div>`;
-  return `<div class="hero"${s.hero?` style="background-image:linear-gradient(#0009,#0009),url(${s.hero})"`:''}><div class="wrap"><div class="eyebrow">${E(s.eyebrow)}</div><h1>${esc(s.name)}</h1><p>${E(s.tagline)}</p><a class="btn pri" href="#/ajukan">${E(s.cta)}</a>${s.wa?`<a class="btn" href="${wa(s.wa)}"${ext}>WhatsApp</a>`:''}</div></div>
-<section class="wrap about"><div class="about-grid"><div class="about-text">${el('Profil Perusahaan')}<div class="prose">${fmt(p.body)}</div><a class="btn pri" href="#/ajukan">${E(s.cta)}</a></div>${p.img?`<div class="about-img"><img src="${p.img}" alt=""></div>`:''}</div></section>
+  return `<div class="hero"${s.hero?` style="--hero:url(${s.hero})"`:''}><div class="wrap"><div class="eyebrow">${E(s.eyebrow)}</div><h1>${esc(s.name)}</h1><p>${E(s.tagline)}</p><div class="hb"><a class="btn pri" href="#/ajukan">${E(s.cta)}</a>${s.wa?`<a class="btn" href="${wa(s.wa)}"${ext}>WhatsApp</a>`:''}</div></div></div>
+${aboutSec(p)}
 ${D.services.length?`<section class="expertise"><div class="wrap">${el('Keahlian Kami')}${h('Layanan Kami')}${c(D.services,x=>`<a class="card svc" href="#/${esc(x.to)}">${x.img?`<img src="${x.img}" alt="">`:''}<h3>${E(x.t)}</h3><p>${E(x.d)}</p></a>`)}</div></section>`:''}
-<section class="wrap">${D.why.length?h('Mengapa Memilih Kami')+c(D.why,x=>`<div class="card"><h3>${E(x.t)}</h3><p>${E(x.d)}</p></div>`):''}
-${D.testi.length?h('Testimoni')+c(D.testi,x=>`<div class="card"><p>“${E(x.t)}”</p><b>${esc(x.n)}</b> <span class="mut">${E(x.r)}</span></div>`):''}
+${D.why.length?`<section class="wrap">${h('Mengapa Memilih Kami')+c(D.why,x=>`<div class="card"><h3>${E(x.t)}</h3><p>${E(x.d)}</p></div>`)}</section>`:''}
+${statSec()}
+<section class="wrap">${D.testi.length?h('Testimoni')+c(D.testi,x=>`<div class="card"><p>“${E(x.t)}”</p><b>${esc(x.n)}</b> <span class="mut">${E(x.r)}</span></div>`):''}
 ${h('Hubungi Kami')}${form()}</section>`}
 
 function route(){
@@ -84,9 +125,9 @@ function route(){
   $('#nav').classList.remove('show');document.querySelectorAll('.dd.open').forEach(d=>d.classList.remove('open'));
   nav();foot();scrollTo(0,0);
   if(cur=='panel')return adminView();
-  if(cur.split('/')[0]=='ajukan'){$('#app').innerHTML=apply(cur.split('/')[1]);return}
+  if(cur.split('/')[0]=='ajukan'){$('#app').innerHTML=apply(cur.split('/')[1]);anim();onScroll();return}
   const p=D.pages.find(x=>x.id==cur&&!x.group&&(x.show||x.ao))||D.pages.find(x=>x.id=='beranda');
-  $('#app').innerHTML=p.id=='beranda'?home(p):page(p)}
+  $('#app').innerHTML=p.id=='beranda'?home(p):page(p);if(p.id=='beranda')runCount();anim();onScroll()}
 
 const ex=b=>tt(String(b).split('\n').map(l=>l.trim()).find(l=>l&&!/^(#|- )/.test(l))||'').slice(0,110);
 function page(p){const dk=dl(p),P=D.pages,ch=P.filter(c=>c.parent==p.id&&c.show),tr=[];
@@ -133,7 +174,7 @@ function list(k,title,img){const at=(i,f)=>`data-l="${k}" data-i="${i}" data-f="
 
 let TL=[];
 function strs(){const o=new Set(),a=x=>{x=String(x||'').trim();if(x)o.add(x)},ln=t=>String(t||'').split('\n').forEach(l=>a(l.trim().replace(/^(## |- )/,''))),s=D.site;
-  a(s.tagline);a(s.eyebrow);a(s.cta);
+  a(s.tagline);a(s.eyebrow);a(s.cta);Object.values(D.about).forEach(a);
   D.pages.forEach(p=>{a(p.title);a(p.at);ln(p.body);ln(p.docs)});
   D.services.forEach(x=>{a(x.t);a(x.d)});D.why.forEach(x=>{a(x.t);a(x.d)});D.testi.forEach(x=>{a(x.r);a(x.t)});D.forms.forEach(f=>{a(f.label);String(f.opts||'').split(',').forEach(o=>a(o))});
   return[...o]}
@@ -206,9 +247,11 @@ async function ghPub(){const m=$('#msg'),c=ghc();
     m.textContent='Tersimpan. Website akan diperbarui otomatis dalam 1-2 menit.'}
   catch(e){m.textContent='Gagal: '+e.message}}
 function draw(){const y=scrollY,s=D.site,f=(k,l)=>`<label>${l}<input data-s="${k}" value="${esc(s[k])}"></label>`;
-  const T=[['site','Situs & Kontak'],['look','Tampilan & Gambar'],['services','Layanan'],['pages','Menu & Halaman'],['form','Menu Ajukan'],['why','Keunggulan & Testimoni'],['tr','Terjemahan'],['gh','GitHub'],['lap','Laporan'],['acc','Akun']];let b='';
+  const T=[['site','Situs & Kontak'],['look','Tampilan & Gambar'],['about','Tentang Kami'],['services','Layanan'],['pages','Menu & Halaman'],['form','Menu Ajukan'],['why','Keunggulan & Testimoni'],['tr','Terjemahan'],['gh','GitHub'],['lap','Laporan'],['acc','Akun']];let b='';
   if(tab=='site')b=`<div class="card"><div class="grid">${f('name','Nama perusahaan')}${f('tagline','Slogan')}${f('eyebrow','Teks kecil di atas judul beranda')}${f('cta','Teks tombol ajakan (mis. Ajukan Sekarang)')}${f('phone','Nomor telepon tampil (bar atas & footer)')}${f('wa','Nomor WhatsApp (format 6285702576066)')}${f('email','Email tujuan formulir pengajuan')}${f('address','Alamat kantor')}</div></div>`;
   if(tab=='look')b=`<div class="card"><h3>Logo</h3>${up('logo',s.logo)}</div><div class="card"><h3>Gambar Latar Beranda</h3>${up('hero',s.hero)}</div><div class="card"><h3>Warna</h3><div class="grid"><label>Warna utama (latar beranda dan bar atas)<input type="color" data-s="pri" value="${esc(s.pri)}"></label><label>Warna aksen<input type="color" data-s="acc" value="${esc(s.acc)}"></label></div></div>`;
+  if(tab=='about'){const A=D.about,ta=(k,l,r)=>`<label>${l}<textarea data-ab="${k}" rows="${r}" style="font-family:inherit">${esc(A[k])}</textarea></label>`;
+    b=`<p class="mut">Teks <b>Tentang Kami</b> diubah di tab Menu &amp; Halaman, bagian Beranda. Di sini untuk Tujuan, Visi, Misi, dan angka klien. Setelah mengubah teks, buka tab Terjemahan agar versi Inggris dan Mandarin ikut diperbarui.</p><div class="card">${ta('tujuan','Tujuan Kami',4)}<div style="height:8px"></div>${ta('visi','Visi',3)}<div style="height:8px"></div>${ta('misi','Misi',4)}</div><div class="card"><div class="grid"><label>Angka klien (mis. 400+)<input data-ab="n" value="${esc(A.n)}"></label><label>Keterangan angka<input data-ab="nl" value="${esc(A.nl)}"></label></div></div>`}
   if(tab=='services')b=`<p class="mut">Kartu layanan di beranda. Tiap kartu membuka halaman tujuan yang dipilih (buat halaman baru di tab Menu &amp; Halaman).</p>${list('services','Kartu Layanan',1)}`;
   if(tab=='pages')b=`<p class="mut">Halaman tampil berjenjang mengikuti &quot;Di bawah&quot;; tombol <b>+ Sub</b> menambah sub-menu. Format isi: baris biasa = paragraf, <code>## Judul</code> = subjudul, <code>- teks</code> = poin.</p>${order().map(([i,d])=>card(D.pages[i],i,d)).join('')}<div class="row"><button data-a="add">+ Halaman Baru</button><button data-a="grp">+ Grup Submenu</button></div>`;
   if(tab=='why')b=list('why','Mengapa Memilih Kami')+list('testi','Testimoni (bagian tampil di beranda jika ada isi)');
@@ -267,6 +310,7 @@ function sendMail(b){const box=b.closest('[data-v]'),v=D.pages.find(x=>x.id==box
 
 document.addEventListener('input',e=>{const t=e.target,d=t.dataset;
   if(d.tr){const k=TL[d.n];if(t.value.trim())D.tr[d.tr][k]=t.value;else delete D.tr[d.tr][k];return}
+  if(d.ab){D.about[d.ab]=t.value;return}
   if(d.s!==undefined){D.site[d.s]=t.value;return}
   if(d.l){D[d.l][d.i][d.f]=t.type=='checkbox'?t.checked:t.value;return}
   if(d.k!==undefined&&d.i!==undefined)D.pages[d.i][d.k]=t.type=='checkbox'?t.checked:t.value});
@@ -316,5 +360,16 @@ document.addEventListener('click',async e=>{
 let tp=[];
 document.addEventListener('click',e=>{if(e.target.id!='cp')return;const n=Date.now();tp=tp.filter(t=>n-t<3000);tp.push(n);if(tp.length>=5){tp=[];location.hash='#/panel'}});
 if(sget()=='2'){sset(1);location.hash='#/panel'}
+let RV=null;
+function anim(){if(RV){RV.disconnect();RV=null}
+  if(cur=='panel'||matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;
+  const all=[...document.querySelectorAll('#app .eyebrow,#app h1,#app h2,#app .prose,#app .bx,#app .note,#app .card,#app .stat-n,#app .stat-l,#app .docsample,#app .pimg,#app p.mut')].filter(e=>!e.closest('.hero'));
+  const els=all.filter(e=>!all.some(o=>o!==e&&o.contains(e))),cnt=new Map;
+  RV=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');RV.unobserve(x.target)}}),{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+  els.forEach(e=>{const k=e.parentElement,n=cnt.get(k)||0;cnt.set(k,n+1);e.style.setProperty('--d',Math.min(n,6)*90+'ms');e.classList.add('rv');RV.observe(e)})}
+const sp=document.createElement('div');sp.id='sp';document.body.prepend(sp);
+function onScroll(){const h=document.documentElement,m=h.scrollHeight-h.clientHeight,hd=document.querySelector('header');
+  sp.style.transform=`scaleX(${m>0?Math.min(1,scrollY/m):0})`;if(hd)hd.classList.toggle('sc',scrollY>8)}
+addEventListener('scroll',onScroll,{passive:true});
 addEventListener('hashchange',route);
 route();
