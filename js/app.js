@@ -22,7 +22,7 @@ if((D.v||0)<3){const d=(id,label,type,scope,req)=>({id,label,type,req:!!req,scop
   D.forms.forEach(f=>{const u=UI[f.label];if(u){D.tr.en[f.label]=D.tr.en[f.label]||u[0];D.tr.zh[f.label]=D.tr.zh[f.label]||u[1]}});
   D.v=3}
 D.forms=D.forms||[];
-Object.assign(UI,{'Layanan kami':['Our services','我们的服务'],'Pembuatan KITAS':['KITAS Processing','办理KITAS'],'VISA':['Visa','签证'],'Izin kerja Orang Asing (TKA)':['Work Permits for Foreign Workers (TKA)','外籍劳工（TKA）工作许可'],'Pendirian Perusahaan':['Company Establishment','公司设立'],'Tentang Kami':['About Us','关于我们'],'Tujuan Kami':['Our Purpose','我们的目标'],'Visi':['Vision','愿景'],'Misi':['Mission','使命'],'Sektor yang kami layani':['Sectors we serve','服务行业'],'Smelter':['Smelters','冶炼厂'],'Kantor perusahaan':['Corporate offices','公司办事处'],'Sekolah internasional':['International schools','国际学校'],'Individu dengan sponsor WNI':['Individuals sponsored by Indonesian citizens','由印尼公民担保的个人']});
+Object.assign(UI,{'Klien Kami':['Our Clients','我们的客户'],'Dipercaya oleh perusahaan, sekolah, dan yayasan':['Trusted by companies, schools, and foundations','深受企业、学校和基金会信赖'],'Layanan kami':['Our services','我们的服务'],'Pembuatan KITAS':['KITAS Processing','办理KITAS'],'VISA':['Visa','签证'],'Izin kerja Orang Asing (TKA)':['Work Permits for Foreign Workers (TKA)','外籍劳工（TKA）工作许可'],'Pendirian Perusahaan':['Company Establishment','公司设立'],'Tentang Kami':['About Us','关于我们'],'Tujuan Kami':['Our Purpose','我们的目标'],'Visi':['Vision','愿景'],'Misi':['Mission','使命'],'Sektor yang kami layani':['Sectors we serve','服务行业'],'Smelter':['Smelters','冶炼厂'],'Kantor perusahaan':['Corporate offices','公司办事处'],'Sekolah internasional':['International schools','国际学校'],'Individu dengan sponsor WNI':['Individuals sponsored by Indonesian citizens','由印尼公民担保的个人']});
 if((D.v||0)<4){
   const T0='PT Karya Gemilang Konsultan, sebuah divisi dari PT Bintang Aneka Karya Jasa Konsultan, memiliki spesialisasi dalam layanan pengurusan visa, izin tinggal bagi warga negara asing, izin kerja tenaga kerja asing (TKA), serta legalitas perusahaan. Sejak didirikan pada tahun 2012, kami telah membantu lebih dari 400 perusahaan dan yayasan dari berbagai sektor—mulai dari fasilitas pengolahan logam (smelter) dan kantor perusahaan hingga sekolah internasional—serta individu yang disponsori oleh warga negara Indonesia. Setiap solusi dirancang khusus untuk memenuhi kebutuhan spesifik klien, guna menghasilkan capaian yang akurat, terukur, dan berkelanjutan.',
     A={tujuan:'Membantu klien memenuhi kebutuhan terkait visa, izin tinggal, izin kerja tenaga kerja asing (TKA), dan legalitas perusahaan secara cepat, akurat, serta sesuai dengan peraturan, sehingga mereka dapat beroperasi di Indonesia dengan penuh keyakinan dan ketenangan pikiran.',
@@ -110,12 +110,20 @@ function runCount(){const els=document.querySelectorAll('.cnt');if(!els.length)r
   if(matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window)){els.forEach(done);return}
   const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){io.unobserve(x.target);go(x.target)}}),{threshold:.5});els.forEach(e=>io.observe(e))}
 
+const CLIENTS=['IHIP','Indonesia Huabao Industrial Park','BTIIG','PT Shurshi Indonesia Investment','Zhenshi Holding Group','Jujiang Construction Group','IWIP','PT Yilong Equipment Rental','BI','MBN','PT Yintai International Group','PT Sionchem Global Indo','MIS Jakarta','Kipina','Sekolah Pelita Utama Kota Batam','Karunia Global School','Holy Angels School Indonesia','Universitas Al Azhar Indonesia','Sekolah Terpadu','Surabaya Intercultural School','Mutiara Harapan Islamic School','STBA Persahabatan Internasional Asia','Pah Tsung School','Yayasan','Delonix','CRRC','Aice','Lesso','Five Star General Resources','Hisamitsu','Huabao','Indoharvest Spice','MHE Group Indonesia','Blue Water Safaris','MCC','Heveya'];
+const csrc=i=>{const n=String(i+1).padStart(2,'0');return(window.CLIENT_SRC&&window.CLIENT_SRC[n])||`img/clients/c${n}.webp`};
+function clientsSec(){
+  const row=(idx,sec,rev)=>{const one=(dup)=>idx.map(i=>`<span class="cl"${dup?' aria-hidden="true"':''}><img src="${csrc(i)}" alt="${dup?'':esc(CLIENTS[i])}" width="124" height="124" decoding="async"></span>`).join('');
+    return `<div class="mq${rev?' rev':''}"><div class="mq-t" style="--s:${sec}s">${one(0)}${one(1)}</div></div>`};
+  const a=CLIENTS.map((_,i)=>i).filter(i=>i%2==0),b=CLIENTS.map((_,i)=>i).filter(i=>i%2==1);
+  return `<section class="clients"><div class="wrap"><h2>${E('Klien Kami')}</h2><p class="mut">${E('Dipercaya oleh perusahaan, sekolah, dan yayasan')}</p></div>${row(a,58,false)}${row(b,70,true)}</section>`}
 function home(p){const s=D.site,h=t=>`<h2>${E(t)}</h2>`,el=t=>`<div class="eyebrow line">${E(t)}</div>`,c=(a,f)=>`<div class="cards">${a.map(f).join('')}</div>`;
   return `<div class="hero"${s.hero?` style="--hero:url(${s.hero})"`:''}><div class="wrap"><div class="eyebrow">${E(s.eyebrow)}</div><h1>${esc(s.name)}</h1><p>${E(s.tagline)}</p><div class="hb"><a class="btn pri" href="#/ajukan">${E(s.cta)}</a>${s.wa?`<a class="btn" href="${wa(s.wa)}"${ext}>WhatsApp</a>`:''}</div></div></div>
 ${aboutSec(p)}
 ${D.services.length?`<section class="expertise"><div class="wrap">${el('Keahlian Kami')}${h('Layanan Kami')}${c(D.services,x=>`<a class="card svc" href="#/${esc(x.to)}">${x.img?`<img src="${x.img}" alt="">`:''}<h3>${E(x.t)}</h3><p>${E(x.d)}</p></a>`)}</div></section>`:''}
 ${D.why.length?`<section class="wrap">${h('Mengapa Memilih Kami')+c(D.why,x=>`<div class="card"><h3>${E(x.t)}</h3><p>${E(x.d)}</p></div>`)}</section>`:''}
 ${statSec()}
+${clientsSec()}
 <section class="wrap">${D.testi.length?h('Testimoni')+c(D.testi,x=>`<div class="card"><p>“${E(x.t)}”</p><b>${esc(x.n)}</b> <span class="mut">${E(x.r)}</span></div>`):''}
 ${h('Hubungi Kami')}${form()}</section>`}
 
